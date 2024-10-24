@@ -14,7 +14,7 @@
 - [Mailpit](https://github.com/wodby/stack-mailpit)
 - [Gotenberg](https://github.com/wodby/stack-gotenberg)
 - [OpenSMTPD](https://github.com/wodby/stack-opensmtpd)
-- [HTML](https://github.com/wodby/stack-htlm)
+- [HTML](https://github.com/wodby/stack-html)
 - [Cloud MySQL](https://github.com/wodby/stack-cloud-mysql)
 - [Cloud MariaDB](https://github.com/wodby/stack-cloud-mariadb)
 - [Cloud PostgreSQL](https://github.com/wodby/stack-cloud-postgres)
