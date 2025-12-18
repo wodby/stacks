@@ -1,5 +1,9 @@
 # Wodby 2.0 stacks
 
+Deploy apps to Kubernetes and K3S (self-managed lightweight Kubernetes) with Wodby 2.0 using the stacks below.
+
+Add a stack from our catalog and customize to your need or fork a stack repository to edit its [template](https://wodby.com/docs/2.0/stacks/template/).
+
 https://wodby.com/stacks
 
 Stacks consist of [services](https://github.com/wodby/services) and are blueprints for deploying apps via Wodby.
