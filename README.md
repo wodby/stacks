@@ -25,6 +25,8 @@ Stacks consist of [services](https://github.com/wodby/services) and are blueprin
 - [Gotenberg](https://github.com/wodby/stack-gotenberg)
 - [OpenSMTPD](https://github.com/wodby/stack-opensmtpd)
 - [HTML](https://github.com/wodby/stack-html)
+- [OpenClaw](https://github.com/wodby/stack-openclaw)
+- [Tailscale](https://github.com/wodby/stack-tailscale)
 - [Cloud MySQL](https://github.com/wodby/stack-cloud-mysql)
 - [Cloud MariaDB](https://github.com/wodby/stack-cloud-mariadb)
 - [Cloud PostgreSQL](https://github.com/wodby/stack-cloud-postgres)
