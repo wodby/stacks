@@ -8,6 +8,7 @@ https://wodby.com/stacks
 
 Stacks consist of [services](https://github.com/wodby/services) and are blueprints for deploying apps via Wodby.
 
+- [3X-UI](https://github.com/wodby/stack-3xui)
 - [PHP](https://github.com/wodby/stack-php)
 - [Drupal](https://github.com/wodby/stack-drupal)
 - [WordPress](https://github.com/wodby/stack-wordpress)
