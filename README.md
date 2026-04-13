@@ -18,6 +18,7 @@ Stacks consist of [services](https://github.com/wodby/services) and are blueprin
 - [Next.js](https://github.com/wodby/stack-nextjs)
 - [MariaDB](https://github.com/wodby/stack-mariadb)
 - [PostgreSQL](https://github.com/wodby/stack-postgres)
+- [PostGIS](https://github.com/wodby/stack-postgis)
 - [Solr](https://github.com/wodby/stack-solr)
 - [ZooKeeper](https://github.com/wodby/stack-zookeeper)
 - [Valkey](https://github.com/wodby/stack-valkey)
