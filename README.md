@@ -33,7 +33,6 @@ Stacks consist of [services](https://github.com/wodby/services) and are blueprin
 - [Cloud MySQL](https://github.com/wodby/stack-cloud-mysql)
 - [Cloud MariaDB](https://github.com/wodby/stack-cloud-mariadb)
 - [Cloud PostgreSQL](https://github.com/wodby/stack-cloud-postgres)
-- [Ingress NGINX](https://github.com/wodby/stack-ingress-nginx)
 - [Envoy Gateway](https://github.com/wodby/stack-envoy-gateway)
 - [Monitoring](https://github.com/wodby/stack-monitoring)
 - [FRPC](https://github.com/wodby/stack-frpc)
