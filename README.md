@@ -47,6 +47,13 @@ Before publishing a stack for others to use, review:
 | WordPress | [wodby/stack-wordpress](https://github.com/wodby/stack-wordpress) |
 | Laravel | [wodby/stack-laravel](https://github.com/wodby/stack-laravel) |
 | Matomo | [wodby/stack-matomo](https://github.com/wodby/stack-matomo) |
+| Python | [wodby/stack-python](https://github.com/wodby/stack-python) |
+| Django | [wodby/stack-django](https://github.com/wodby/stack-django) |
+| FastAPI | [wodby/stack-fastapi](https://github.com/wodby/stack-fastapi) |
+| Flask | [wodby/stack-flask](https://github.com/wodby/stack-flask) |
+| Ruby | [wodby/stack-ruby](https://github.com/wodby/stack-ruby) |
+| Rails | [wodby/stack-rails](https://github.com/wodby/stack-rails) |
+| Go | [wodby/stack-go](https://github.com/wodby/stack-go) |
 | Node.js | [wodby/stack-node](https://github.com/wodby/stack-node) |
 | Next.js | [wodby/stack-nextjs](https://github.com/wodby/stack-nextjs) |
 | Dagster | [wodby/stack-dagster](https://github.com/wodby/stack-dagster) |
