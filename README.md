@@ -84,12 +84,17 @@ Before publishing a stack for others to use, review:
 | Tailscale | [wodby/stack-tailscale](https://github.com/wodby/stack-tailscale) |
 | 3X UI | [wodby/stack-3xui](https://github.com/wodby/stack-3xui) |
 
+### Observability app stacks
+
+| Stack | Repository |
+| --- | --- |
+| Prometheus | [wodby/stack-prometheus](https://github.com/wodby/stack-prometheus) |
+
 ### Kubernetes and platform stacks
 
 | Stack | Repository |
 | --- | --- |
 | Envoy Gateway | [wodby/stack-envoy-gateway](https://github.com/wodby/stack-envoy-gateway) |
-| Prometheus | [wodby/stack-prometheus](https://github.com/wodby/stack-prometheus) |
 | Monitoring | [wodby/stack-monitoring](https://github.com/wodby/stack-monitoring) |
 | Metrics | [wodby/stack-metrics](https://github.com/wodby/stack-metrics) |
 | AWS LB Controller | [wodby/stack-aws-lb-controller](https://github.com/wodby/stack-aws-lb-controller) |
