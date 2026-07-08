@@ -89,6 +89,7 @@ Before publishing a stack for others to use, review:
 | Stack | Repository |
 | --- | --- |
 | Envoy Gateway | [wodby/stack-envoy-gateway](https://github.com/wodby/stack-envoy-gateway) |
+| Prometheus | [wodby/stack-prometheus](https://github.com/wodby/stack-prometheus) |
 | Monitoring | [wodby/stack-monitoring](https://github.com/wodby/stack-monitoring) |
 | Metrics | [wodby/stack-metrics](https://github.com/wodby/stack-metrics) |
 | AWS LB Controller | [wodby/stack-aws-lb-controller](https://github.com/wodby/stack-aws-lb-controller) |
