@@ -58,7 +58,7 @@ Before publishing a stack for others to use, review:
 | Next.js | [wodby/stack-nextjs](https://github.com/wodby/stack-nextjs) |
 | Dagster | [wodby/stack-dagster](https://github.com/wodby/stack-dagster) |
 
-### Data and search stacks
+### Data, messaging, and search stacks
 
 | Stack | Repository |
 | --- | --- |
@@ -70,6 +70,7 @@ Before publishing a stack for others to use, review:
 | Cloud PostgreSQL | [wodby/stack-cloud-postgres](https://github.com/wodby/stack-cloud-postgres) |
 | Valkey | [wodby/stack-valkey](https://github.com/wodby/stack-valkey) |
 | Redis | [wodby/stack-redis](https://github.com/wodby/stack-redis) |
+| RabbitMQ | [wodby/stack-rabbitmq](https://github.com/wodby/stack-rabbitmq) |
 | Solr | [wodby/stack-solr](https://github.com/wodby/stack-solr) |
 | ZooKeeper | [wodby/stack-zookeeper](https://github.com/wodby/stack-zookeeper) |
 
