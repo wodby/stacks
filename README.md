@@ -39,30 +39,6 @@ Before publishing a stack for others to use, review:
 - [Stack updates](https://wodby.com/docs/2.0/stacks/updates/)
 - [Naming rules](https://wodby.com/docs/2.0/naming/)
 
-## Repository presentation
-
-[`scripts/update_repository_readmes.py`](scripts/update_repository_readmes.py)
-renders the README in every indexed `stack-*` repository. It resolves service
-references, links compatible source templates and service repositories, and
-classifies any stack containing an infrastructure service as a Kubernetes
-system stack.
-The aggregate, service, and stack repositories must be checked out as sibling
-directories, and the script requires PyYAML.
-
-```bash
-python scripts/update_repository_readmes.py --check
-python scripts/update_repository_readmes.py --write
-```
-
-[`scripts/update_github_metadata.py`](scripts/update_github_metadata.py) applies
-the same classification to GitHub descriptions, topics, and catalog homepages.
-It requires the GitHub CLI and `WODBY_GITHUB_TOKEN`.
-
-```bash
-python scripts/update_github_metadata.py --check
-python scripts/update_github_metadata.py --write
-```
-
 ## Managed stacks
 
 ### Application stacks
