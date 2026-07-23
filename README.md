@@ -2,10 +2,14 @@
 
 This repository is the index of Wodby-managed stack repositories for Wodby 2.0.
 
-Stacks are application blueprints. A stack selects the
-[services](https://github.com/wodby/services) an app should use and defines the
-default configuration, links, versions, resources, and optional components for
-those services.
+Application stacks are reusable blueprints for user workloads. A stack selects
+the [services](https://github.com/wodby/services) an app should use and defines
+their default configuration, links, versions, resources, and optional
+components.
+
+Kubernetes system stacks are different: Wodby installs and manages them as
+cluster infrastructure when required by the cluster provider and configuration.
+They are not templates for user-deployed applications.
 
 - Stack catalog: https://wodby.com/stacks
 - Stack docs: https://wodby.com/docs/2.0/stacks/
@@ -34,6 +38,30 @@ Before publishing a stack for others to use, review:
 - [Stack services](https://wodby.com/docs/2.0/stacks/services/)
 - [Stack updates](https://wodby.com/docs/2.0/stacks/updates/)
 - [Naming rules](https://wodby.com/docs/2.0/naming/)
+
+## Repository presentation
+
+[`scripts/update_repository_readmes.py`](scripts/update_repository_readmes.py)
+renders the README in every indexed `stack-*` repository. It resolves service
+references, links compatible source templates and service repositories, and
+classifies any stack containing an infrastructure service as a Kubernetes
+system stack.
+The aggregate, service, and stack repositories must be checked out as sibling
+directories, and the script requires PyYAML.
+
+```bash
+python scripts/update_repository_readmes.py --check
+python scripts/update_repository_readmes.py --write
+```
+
+[`scripts/update_github_metadata.py`](scripts/update_github_metadata.py) applies
+the same classification to GitHub descriptions, topics, and catalog homepages.
+It requires the GitHub CLI and `WODBY_GITHUB_TOKEN`.
+
+```bash
+python scripts/update_github_metadata.py --check
+python scripts/update_github_metadata.py --write
+```
 
 ## Managed stacks
 
@@ -81,9 +109,9 @@ Before publishing a stack for others to use, review:
 | Mailpit | [wodby/stack-mailpit](https://github.com/wodby/stack-mailpit) |
 | OpenSMTPD | [wodby/stack-opensmtpd](https://github.com/wodby/stack-opensmtpd) |
 | Gotenberg | [wodby/stack-gotenberg](https://github.com/wodby/stack-gotenberg) |
-| FRPC | [wodby/stack-frpc](https://github.com/wodby/stack-frpc) |
 | Tailscale | [wodby/stack-tailscale](https://github.com/wodby/stack-tailscale) |
 | 3X UI | [wodby/stack-3xui](https://github.com/wodby/stack-3xui) |
+| OpenClaw | [wodby/stack-openclaw](https://github.com/wodby/stack-openclaw) |
 
 ### Observability app stacks
 
@@ -91,7 +119,11 @@ Before publishing a stack for others to use, review:
 | --- | --- |
 | Prometheus | [wodby/stack-prometheus](https://github.com/wodby/stack-prometheus) |
 
-### Kubernetes and platform stacks
+### Kubernetes system stacks
+
+Wodby provisions these stacks as Kubernetes system apps. Their availability and
+configuration depend on the cluster provider and selected infrastructure
+features.
 
 | Stack | Repository |
 | --- | --- |
@@ -99,4 +131,4 @@ Before publishing a stack for others to use, review:
 | Monitoring | [wodby/stack-monitoring](https://github.com/wodby/stack-monitoring) |
 | Metrics | [wodby/stack-metrics](https://github.com/wodby/stack-metrics) |
 | AWS LB Controller | [wodby/stack-aws-lb-controller](https://github.com/wodby/stack-aws-lb-controller) |
-| OpenClaw | [wodby/stack-openclaw](https://github.com/wodby/stack-openclaw) |
+| FRPC | [wodby/stack-frpc](https://github.com/wodby/stack-frpc) |
