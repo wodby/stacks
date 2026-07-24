@@ -74,6 +74,16 @@ def indexed_manifest_paths(repo_dir: Path, entity: str) -> list[Path]:
     return result
 
 
+def build_boilerplates(manifest: dict[str, Any]) -> list[dict[str, Any]]:
+    build = manifest.get("build") or {}
+    boilerplates = build.get("boilerplates")
+    templates = build.get("templates")
+    if boilerplates is not None and templates is not None:
+        raise RuntimeError('service build cannot define both "boilerplates" and legacy "templates"')
+    value = boilerplates if boilerplates is not None else templates
+    return value if isinstance(value, list) else []
+
+
 def wrapped(value: str) -> str:
     links: list[str] = []
 
@@ -104,17 +114,17 @@ def service_catalog() -> dict[str, dict[str, Any]]:
             name = str(manifest.get("name", "")).strip()
             if not name:
                 continue
-            templates = []
-            for template in (manifest.get("build") or {}).get("templates") or []:
-                repo = str(template.get("repo", "")).strip()
+            boilerplates = []
+            for boilerplate in build_boilerplates(manifest):
+                repo = str(boilerplate.get("repo", "")).strip()
                 if not repo:
                     continue
-                templates.append(
+                boilerplates.append(
                     {
                         "title": str(
-                            template.get("title")
-                            or template.get("name")
-                            or "Starter template"
+                            boilerplate.get("title")
+                            or boilerplate.get("name")
+                            or "Starter boilerplate"
                         ),
                         "repo": repo,
                     }
@@ -127,7 +137,7 @@ def service_catalog() -> dict[str, dict[str, Any]]:
                     str(label) for label in manifest.get("labels") or []
                 ],
                 "infrastructure": manifest.get("type") == "infrastructure",
-                "templates": templates,
+                "boilerplates": boilerplates,
             }
     return catalog
 
@@ -167,20 +177,20 @@ def application_summary(display_name: str, references: list[str], catalog: dict[
     return f"Deploy {display_name} applications on Kubernetes with Wodby."
 
 
-def starter_templates(
+def starter_boilerplates(
     references: list[str],
     catalog: dict[str, dict[str, Any]],
 ) -> list[dict[str, str]]:
-    templates: list[dict[str, str]] = []
+    boilerplates: list[dict[str, str]] = []
     seen: set[tuple[str, str]] = set()
     for reference in references:
-        for template in catalog.get(reference, {}).get("templates", []):
-            key = (template["title"], template["repo"])
+        for boilerplate in catalog.get(reference, {}).get("boilerplates", []):
+            key = (boilerplate["title"], boilerplate["repo"])
             if key in seen:
                 continue
             seen.add(key)
-            templates.append(template)
-    return templates
+            boilerplates.append(boilerplate)
+    return boilerplates
 
 
 def service_sources(
@@ -342,7 +352,7 @@ def render_stack_readme(
         if infrastructure
         else application_summary(display_name, references, catalog)
     )
-    templates = starter_templates(references, catalog)
+    boilerplates = starter_boilerplates(references, catalog)
     sources = service_sources(references, catalog)
     overview = preserved_overview(old_readme, infrastructure) or generated_overview(
         repo_dir, manifests, manifest_paths
@@ -372,17 +382,19 @@ def render_stack_readme(
         "- [Stack manifest reference](https://wodby.com/docs/2.0/stacks/template/)",
     ]
 
-    if templates and not infrastructure:
-        lines.extend(["", "## Start from a template", ""])
+    if boilerplates and not infrastructure:
+        lines.extend(["", "## Start from a boilerplate", ""])
         lines.append(
             wrapped(
-                "Use one of the compatible source templates exposed by this stack's "
+                "Use one of the compatible boilerplates exposed by this stack's "
                 "services to start with Wodby CI build configuration:"
             )
         )
         lines.append("")
-        for template in templates:
-            lines.append(f"- [{template['title']}]({template['repo']})")
+        for boilerplate in boilerplates:
+            lines.append(
+                f"- [{boilerplate['title']}]({boilerplate['repo']})"
+            )
 
     if sources:
         heading = (
@@ -430,7 +442,8 @@ def render_stack_readme(
         )
     else:
         starter_links = ", ".join(
-            f"[{template['title']}]({template['repo']})" for template in templates
+            f"[{boilerplate['title']}]({boilerplate['repo']})"
+            for boilerplate in boilerplates
         )
         start_sentence = (
             f"Start from {starter_links}, or connect your own compatible source repository."
