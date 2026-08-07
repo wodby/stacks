@@ -74,6 +74,7 @@ Before publishing a stack for others to use, review:
 | Cloud PostgreSQL | [wodby/stack-cloud-postgres](https://github.com/wodby/stack-cloud-postgres) |
 | Valkey | [wodby/stack-valkey](https://github.com/wodby/stack-valkey) |
 | Redis | [wodby/stack-redis](https://github.com/wodby/stack-redis) |
+| Memcached | [wodby/stack-memcached](https://github.com/wodby/stack-memcached) |
 | RabbitMQ | [wodby/stack-rabbitmq](https://github.com/wodby/stack-rabbitmq) |
 | Solr | [wodby/stack-solr](https://github.com/wodby/stack-solr) |
 | ZooKeeper | [wodby/stack-zookeeper](https://github.com/wodby/stack-zookeeper) |
