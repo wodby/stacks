@@ -3,7 +3,8 @@
 
 The aggregate README is the stack inventory. A stack is classified as a
 Kubernetes system stack when any referenced service manifest has
-``type: infrastructure``.
+``type: infrastructure``. Stack-specific public documentation is discovered
+from the sibling ``docs`` repository.
 """
 
 from __future__ import annotations
@@ -21,6 +22,7 @@ import yaml
 STACKS_REPOSITORY = Path(__file__).resolve().parents[1]
 WORKSPACE = STACKS_REPOSITORY.parent
 SERVICES_REPOSITORY = WORKSPACE / "services"
+PUBLIC_DOCS_URL = "https://wodby.com/docs/2.0/stacks/catalog"
 
 INFRASTRUCTURE_SUMMARIES = {
     "stack-aws-lb-controller": (
@@ -208,6 +210,16 @@ def service_sources(
     return sources
 
 
+def public_stack_guide_url(repo_name: str) -> str | None:
+    catalog_dir = WORKSPACE / "docs" / "2.0" / "docs" / "stacks" / "catalog"
+    if not catalog_dir.is_dir():
+        raise RuntimeError(
+            "public docs catalog not found; clone wodby/docs as the sibling docs repository"
+        )
+    slug = repo_name.removeprefix("stack-")
+    return f"{PUBLIC_DOCS_URL}/{slug}/" if (catalog_dir / slug / "index.md").is_file() else None
+
+
 def format_versions(service: dict[str, Any]) -> str:
     versions = service.get("versions") or []
     if not versions:
@@ -357,6 +369,7 @@ def render_stack_readme(
     overview = preserved_overview(old_readme, infrastructure) or generated_overview(
         repo_dir, manifests, manifest_paths
     )
+    guide_url = public_stack_guide_url(repo_name)
 
     title = (
         f"# {display_name} Kubernetes system stack for Wodby"
@@ -378,9 +391,15 @@ def render_stack_readme(
             if infrastructure
             else "- [Browse Wodby application stacks](https://wodby.com/stacks)"
         ),
-        "- [Wodby stack documentation](https://wodby.com/docs/2.0/stacks/)",
-        "- [Stack manifest reference](https://wodby.com/docs/2.0/stacks/template/)",
     ]
+    if guide_url:
+        lines.append(f"- [{display_name} stack guide]({guide_url})")
+    lines.extend(
+        [
+            "- [Wodby stack documentation](https://wodby.com/docs/2.0/stacks/)",
+            "- [Stack manifest reference](https://wodby.com/docs/2.0/stacks/template/)",
+        ]
+    )
 
     if boilerplates and not infrastructure:
         lines.extend(["", "## Start from a boilerplate", ""])

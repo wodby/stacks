@@ -1,0 +1,133 @@
+name: Stack README Sync
+
+on:
+  schedule:
+    - cron: "17 5 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: stack-readme-sync
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+
+    steps:
+      - name: Check Out Stack Index
+        uses: actions/checkout@v5
+        with:
+          path: stacks
+          token: ${{ secrets.WODBOT_GITHUB_PAT || github.token }}
+
+      - name: Check Out Service Index
+        uses: actions/checkout@v5
+        with:
+          repository: wodby/services
+          path: services
+          token: ${{ secrets.WODBOT_GITHUB_PAT || github.token }}
+
+      - name: Check Out Public Documentation
+        uses: actions/checkout@v5
+        with:
+          repository: wodby/docs
+          path: docs
+          token: ${{ secrets.WODBOT_GITHUB_PAT || github.token }}
+
+      - name: Set Up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Install Dependencies
+        run: python -m pip install --upgrade pip pyyaml
+
+      - name: Validate Credentials
+        env:
+          WODBOT_GITHUB_PAT: ${{ secrets.WODBOT_GITHUB_PAT }}
+          WODBOT_GIT_EMAIL: ${{ secrets.WODBOT_GIT_EMAIL }}
+          WODBOT_GIT_NAME: ${{ secrets.WODBOT_GIT_NAME }}
+        run: |
+          for variable in WODBOT_GITHUB_PAT WODBOT_GIT_EMAIL WODBOT_GIT_NAME; do
+            if [[ -z "${!variable}" ]]; then
+              echo "::error::${variable} is required to update stack repository READMEs."
+              exit 1
+            fi
+          done
+
+      - name: Clone Managed Repositories
+        working-directory: stacks
+        env:
+          WODBOT_GITHUB_PAT: ${{ secrets.WODBOT_GITHUB_PAT }}
+        run: |
+          python - <<'PY'
+          import os
+          import subprocess
+          from pathlib import Path
+          from urllib.parse import quote
+
+          from scripts.update_repository_readmes import repository_names
+
+          stacks_repository = Path.cwd()
+          workspace = stacks_repository.parent
+          repositories = (
+              repository_names(stacks_repository / "README.md", "stack-")
+              + repository_names(workspace / "services" / "README.md", "service-")
+          )
+          token = quote(os.environ["WODBOT_GITHUB_PAT"], safe="")
+          for repository in repositories:
+              url = f"https://x-access-token:{token}@github.com/wodby/{repository}.git"
+              subprocess.run(
+                  ["git", "clone", "--depth", "1", url, str(workspace / repository)],
+                  check=True,
+              )
+          PY
+
+      - name: Test README Generator
+        working-directory: stacks
+        run: python -m unittest discover -s tests
+
+      - name: Render Stack READMEs
+        working-directory: stacks
+        run: python scripts/update_repository_readmes.py --write
+
+      - name: Commit and Push README Changes
+        working-directory: stacks
+        env:
+          WODBOT_GIT_EMAIL: ${{ secrets.WODBOT_GIT_EMAIL }}
+          WODBOT_GIT_NAME: ${{ secrets.WODBOT_GIT_NAME }}
+        run: |
+          mapfile -t repositories < <(
+            python - <<'PY'
+          from pathlib import Path
+
+          from scripts.update_repository_readmes import repository_names
+
+          for repository in repository_names(Path("README.md"), "stack-"):
+              print(repository)
+          PY
+          )
+
+          changed=0
+          for repository in "${repositories[@]}"; do
+            repository_dir="../${repository}"
+            if git -C "$repository_dir" diff --quiet -- README.md; then
+              continue
+            fi
+
+            git -C "$repository_dir" config user.email "$WODBOT_GIT_EMAIL"
+            git -C "$repository_dir" config user.name "$WODBOT_GIT_NAME"
+            git -C "$repository_dir" add README.md
+            git -C "$repository_dir" commit \
+              -m "docs: sync generated README" \
+              -m "Refresh generated stack documentation from the current stack, service, and public documentation state."
+            branch="$(git -C "$repository_dir" branch --show-current)"
+            git -C "$repository_dir" push origin "$branch"
+            changed=$((changed + 1))
+          done
+
+          echo "Updated ${changed} stack repository README file(s)." >> "$GITHUB_STEP_SUMMARY"
