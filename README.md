@@ -86,7 +86,6 @@ Before publishing a stack for others to use, review:
 | Mailpit | [wodby/stack-mailpit](https://github.com/wodby/stack-mailpit) |
 | OpenSMTPD | [wodby/stack-opensmtpd](https://github.com/wodby/stack-opensmtpd) |
 | Gotenberg | [wodby/stack-gotenberg](https://github.com/wodby/stack-gotenberg) |
-| Tailscale | [wodby/stack-tailscale](https://github.com/wodby/stack-tailscale) |
 | 3X UI | [wodby/stack-3xui](https://github.com/wodby/stack-3xui) |
 | FRP Server | [wodby/stack-frps](https://github.com/wodby/stack-frps) |
 | OpenClaw | [wodby/stack-openclaw](https://github.com/wodby/stack-openclaw) |
