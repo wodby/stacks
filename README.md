@@ -77,6 +77,7 @@ Before publishing a stack for others to use, review:
 | Redis | [wodby/stack-redis](https://github.com/wodby/stack-redis) |
 | Memcached | [wodby/stack-memcached](https://github.com/wodby/stack-memcached) |
 | RabbitMQ | [wodby/stack-rabbitmq](https://github.com/wodby/stack-rabbitmq) |
+| Distribution Registry | [wodby/stack-distribution](https://github.com/wodby/stack-distribution) |
 | Solr | [wodby/stack-solr](https://github.com/wodby/stack-solr) |
 | ZooKeeper | [wodby/stack-zookeeper](https://github.com/wodby/stack-zookeeper) |
 
