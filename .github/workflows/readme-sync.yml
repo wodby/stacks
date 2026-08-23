@@ -4,6 +4,12 @@ on:
   schedule:
     - cron: "17 5 * * 1"
   workflow_dispatch:
+    inputs:
+      migrate:
+        description: Insert generated ownership markers into legacy READMEs
+        required: true
+        type: boolean
+        default: false
 
 permissions:
   contents: read
@@ -93,11 +99,19 @@ jobs:
 
       - name: Render Stack READMEs
         working-directory: stacks
-        run: python scripts/update_repository_readmes.py --write
+        env:
+          MIGRATE: ${{ inputs.migrate || false }}
+        run: |
+          mode="--write"
+          if [[ "$MIGRATE" == "true" ]]; then
+            mode="--migrate"
+          fi
+          python scripts/update_repository_readmes.py "$mode"
 
       - name: Commit and Push README Changes
         working-directory: stacks
         env:
+          MIGRATE: ${{ inputs.migrate || false }}
           WODBOT_GIT_EMAIL: ${{ secrets.WODBOT_GIT_EMAIL }}
           WODBOT_GIT_NAME: ${{ secrets.WODBOT_GIT_NAME }}
         run: |
@@ -112,6 +126,13 @@ jobs:
           PY
           )
 
+          commit_subject="docs: sync generated README"
+          commit_description="Refresh generated stack documentation from the current stack, service, and public documentation state."
+          if [[ "$MIGRATE" == "true" ]]; then
+            commit_subject="docs: mark generated README section"
+            commit_description="Separate manifest-derived stack documentation from repository-specific prose so future synchronization preserves manual content."
+          fi
+
           changed=0
           for repository in "${repositories[@]}"; do
             repository_dir="../${repository}"
@@ -123,8 +144,8 @@ jobs:
             git -C "$repository_dir" config user.name "$WODBOT_GIT_NAME"
             git -C "$repository_dir" add README.md
             git -C "$repository_dir" commit \
-              -m "docs: sync generated README" \
-              -m "Refresh generated stack documentation from the current stack, service, and public documentation state."
+              -m "$commit_subject" \
+              -m "$commit_description"
             branch="$(git -C "$repository_dir" branch --show-current)"
             git -C "$repository_dir" push origin "$branch"
             changed=$((changed + 1))

@@ -1,10 +1,15 @@
 #!/usr/bin/env python3
-"""Render README files for the public Wodby stack repositories.
+"""Update generated sections in public Wodby stack repository READMEs.
 
 The aggregate README is the stack inventory. A stack is classified as a
 Kubernetes system stack when any referenced service manifest has
 ``type: infrastructure``. Stack-specific public documentation is discovered
 from the sibling ``docs`` repository.
+
+Only content between ``GENERATED_START`` and ``GENERATED_END`` is replaced
+during normal updates. Everything outside those markers is maintained by
+humans and must remain byte-for-byte unchanged. Legacy READMEs require an
+explicit one-time ``--migrate`` operation before normal synchronization.
 """
 
 from __future__ import annotations
@@ -23,6 +28,9 @@ STACKS_REPOSITORY = Path(__file__).resolve().parents[1]
 WORKSPACE = STACKS_REPOSITORY.parent
 SERVICES_REPOSITORY = WORKSPACE / "services"
 PUBLIC_DOCS_URL = "https://wodby.com/docs/2.0/stacks/catalog"
+PUBLIC_STACKS_URL = "https://wodby.com/stacks"
+GENERATED_START = "<!-- wodby:generated:start -->"
+GENERATED_END = "<!-- wodby:generated:end -->"
 
 INFRASTRUCTURE_SUMMARIES = {
     "stack-aws-lb-controller": (
@@ -81,7 +89,9 @@ def build_boilerplates(manifest: dict[str, Any]) -> list[dict[str, Any]]:
     boilerplates = build.get("boilerplates")
     templates = build.get("templates")
     if boilerplates is not None and templates is not None:
-        raise RuntimeError('service build cannot define both "boilerplates" and legacy "templates"')
+        raise RuntimeError(
+            'service build cannot define both "boilerplates" and legacy "templates"'
+        )
     value = boilerplates if boilerplates is not None else templates
     return value if isinstance(value, list) else []
 
@@ -108,7 +118,9 @@ def wrapped(value: str) -> str:
 
 def service_catalog() -> dict[str, dict[str, Any]]:
     catalog: dict[str, dict[str, Any]] = {}
-    service_repositories = repository_names(SERVICES_REPOSITORY / "README.md", "service-")
+    service_repositories = repository_names(
+        SERVICES_REPOSITORY / "README.md", "service-"
+    )
     for repo_name in service_repositories:
         repo_dir = WORKSPACE / repo_name
         for manifest_path in indexed_manifest_paths(repo_dir, "service"):
@@ -135,9 +147,7 @@ def service_catalog() -> dict[str, dict[str, Any]]:
                 "repo": repo_name,
                 "title": str(manifest.get("title") or name),
                 "type": str(manifest.get("type") or "service"),
-                "labels": [
-                    str(label) for label in manifest.get("labels") or []
-                ],
+                "labels": [str(label) for label in manifest.get("labels") or []],
                 "infrastructure": manifest.get("type") == "infrastructure",
                 "boilerplates": boilerplates,
             }
@@ -153,7 +163,9 @@ def stack_references(manifests: list[dict[str, Any]]) -> list[str]:
     ]
 
 
-def repository_display_name(repo_name: str, manifests: list[dict[str, Any]], readme: str) -> str:
+def repository_display_name(
+    repo_name: str, manifests: list[dict[str, Any]], readme: str
+) -> str:
     heading = readme.splitlines()[0].removeprefix("# ").strip() if readme else ""
     for suffix in (
         " Kubernetes system stack for Wodby",
@@ -174,7 +186,9 @@ def repository_display_name(repo_name: str, manifests: list[dict[str, Any]], rea
     return repo_name.removeprefix("stack-").replace("-", " ").title()
 
 
-def application_summary(display_name: str, references: list[str], catalog: dict[str, dict[str, Any]]) -> str:
+def application_summary(
+    display_name: str, references: list[str], catalog: dict[str, dict[str, Any]]
+) -> str:
     del references, catalog
     return f"Deploy {display_name} applications on Kubernetes with Wodby."
 
@@ -217,7 +231,17 @@ def public_stack_guide_url(repo_name: str) -> str | None:
             "public docs catalog not found; clone wodby/docs as the sibling docs repository"
         )
     slug = repo_name.removeprefix("stack-")
-    return f"{PUBLIC_DOCS_URL}/{slug}/" if (catalog_dir / slug / "index.md").is_file() else None
+    return (
+        f"{PUBLIC_DOCS_URL}/{slug}/"
+        if (catalog_dir / slug / "index.md").is_file()
+        else None
+    )
+
+
+def public_stack_url(repo_name: str) -> str:
+    """Return the stable public catalog URL for a managed stack repository."""
+    slug = repo_name.removeprefix("stack-")
+    return f"{PUBLIC_STACKS_URL}/{slug}"
 
 
 def format_versions(service: dict[str, Any]) -> str:
@@ -257,9 +281,11 @@ def generated_overview(
 ) -> str:
     plural = len(manifests) > 1
     lines = ["## Stack entries" if plural else "## What's included", ""]
-    for manifest, path in zip(manifests, manifest_paths):
+    for manifest, path in zip(manifests, manifest_paths, strict=True):
         if plural:
-            lines.extend([f"### {manifest.get('title', manifest.get('name', 'Stack'))}", ""])
+            lines.extend(
+                [f"### {manifest.get('title', manifest.get('name', 'Stack'))}", ""]
+            )
         lines.extend(
             [
                 "| Component / service | Default configuration |",
@@ -271,7 +297,11 @@ def generated_overview(
             reference = str(service.get("service", ""))
             local_name = str(service.get("name", reference))
             state = "required" if service.get("required") else "optional"
-            state += "; disabled by default" if service.get("disabled") else "; enabled by default"
+            state += (
+                "; disabled by default"
+                if service.get("disabled")
+                else "; enabled by default"
+            )
             details = [state]
             versions = format_versions(service)
             volumes = format_volumes(service)
@@ -282,9 +312,7 @@ def generated_overview(
                 details.append(f"volumes: {volumes}")
             if links:
                 details.append(f"links: {links}")
-            lines.append(
-                f"| {title}<br>`{local_name}` | {'; '.join(details)} |"
-            )
+            lines.append(f"| {title}<br>`{local_name}` | {'; '.join(details)} |")
         relative = path.relative_to(repo_dir).as_posix()
         if relative != "stack.yml":
             lines.extend(["", f"Manifest: [`{relative}`]({relative})"])
@@ -292,42 +320,103 @@ def generated_overview(
     return "\n".join(lines).rstrip()
 
 
-def preserved_overview(readme: str, infrastructure: bool) -> str | None:
-    start = re.search(r"^## (?:What's included|Stack entries)\s*$", readme, re.MULTILINE)
-    if not start:
+def marked_generated_content(content: str) -> str:
+    """Wrap generated content in the stable README ownership markers."""
+    return f"{GENERATED_START}\n\n{content.strip()}\n\n{GENERATED_END}"
+
+
+def generated_marker_span(readme: str) -> tuple[int, int] | None:
+    """Return the generated marker span and reject ambiguous marker layouts."""
+    start_matches = list(
+        re.finditer(rf"^{re.escape(GENERATED_START)}[ \t]*$", readme, re.MULTILINE)
+    )
+    end_matches = list(
+        re.finditer(rf"^{re.escape(GENERATED_END)}[ \t]*$", readme, re.MULTILINE)
+    )
+    if not start_matches and not end_matches:
         return None
-    end = re.search(
-        r"^## (?:Use this stack|Deploy this stack|Role in Wodby infrastructure)\s*$",
-        readme[start.end() :],
+    if len(start_matches) != 1 or len(end_matches) != 1:
+        raise RuntimeError("README must contain exactly one generated marker pair")
+    start = start_matches[0]
+    end = end_matches[0]
+    if start.end() >= end.start():
+        raise RuntimeError("README generated markers are out of order")
+    return start.start(), end.end()
+
+
+def replace_generated_content(readme: str, content: str) -> str:
+    """Replace only the marked block while preserving all manual bytes."""
+    span = generated_marker_span(readme)
+    if span is None:
+        raise RuntimeError("README has no generated markers; run with --migrate first")
+    start, end = span
+    return readme[:start] + marked_generated_content(content) + readme[end:]
+
+
+def remove_legacy_validation_footer(readme: str) -> str:
+    """Remove the old generated validation footer during one-time migration."""
+    footer = re.compile(
+        r"\n(?:Wodby platform maintainers can validate the manifests with:|"
+        r"Validate the manifests? with:)\n\n"
+        r"```bash\n.*?\n```"
+        r"(?:\n\nSee the \[stack manifest reference\].*?)?\n?$",
+        re.DOTALL,
+    )
+    return footer.sub("", readme).rstrip()
+
+
+def migrate_legacy_readme(
+    readme: str,
+    content: str,
+    *,
+    infrastructure: bool,
+) -> str:
+    """Insert markers once while preserving legacy manual documentation.
+
+    The old renderer owned the link, boilerplate, service-definition, and
+    component-table region. Known generic validation and infrastructure tails
+    are removed because their dynamic content now lives inside the marked
+    contract. Other leading and trailing prose is retained.
+    """
+    if generated_marker_span(readme) is not None:
+        return replace_generated_content(readme, content)
+
+    link_start = re.search(
+        r"^- \[(?:[^\]]+ stack on Wodby|Browse Wodby application stacks|"
+        r"Wodby Kubernetes platform)\]\(",
+        readme,
         re.MULTILINE,
     )
-    if not end:
-        overview = readme[start.start() :].strip()
+    overview = re.search(
+        r"^## (?:What's included|Stack entries)\s*$",
+        readme,
+        re.MULTILINE,
+    )
+    if bool(link_start) != bool(overview):
+        raise RuntimeError(
+            "legacy README generated region is incomplete; migrate it manually"
+        )
+
+    if link_start and overview:
+        if link_start.start() >= overview.start():
+            raise RuntimeError("legacy README generated sections are out of order")
+        next_heading = re.search(r"^## ", readme[overview.end() :], re.MULTILINE)
+        generated_end = (
+            overview.end() + next_heading.start() if next_heading else len(readme)
+        )
+        prefix = readme[: link_start.start()].rstrip()
+        suffix = readme[generated_end:].lstrip()
+        if infrastructure and suffix.startswith("## Role in Wodby infrastructure"):
+            suffix = ""
+        suffix = remove_legacy_validation_footer(suffix)
     else:
-        overview = readme[start.start() : start.end() + end.start()].strip()
-    if infrastructure:
-        overview = re.sub(
-            r"\nEnabled optional services are selected by default.*?"
-            r"Required services cannot be excluded\.\n?",
-            "\n"
-            + wrapped(
-                "System services are enabled or disabled according to the cluster "
-                "provider and infrastructure configuration."
-            )
-            + "\n",
-            overview,
-            flags=re.DOTALL,
-        )
-        overview = re.sub(
-            r"System services are enabled or disabled according to the cluster "
-            r"provider and infrastructure configuration\.",
-            wrapped(
-                "System services are enabled or disabled according to the cluster "
-                "provider and infrastructure configuration."
-            ),
-            overview,
-        )
-    return overview
+        prefix = remove_legacy_validation_footer(readme)
+        suffix = ""
+
+    parts = [
+        part for part in (prefix, marked_generated_content(content), suffix) if part
+    ]
+    return "\n\n".join(parts).rstrip() + "\n"
 
 
 def validation_commands(repo_dir: Path, manifest_paths: list[Path]) -> str:
@@ -337,55 +426,23 @@ def validation_commands(repo_dir: Path, manifest_paths: list[Path]) -> str:
     )
 
 
-def render_stack_readme(
+def generated_contract(
+    *,
     repo_name: str,
-    catalog: dict[str, dict[str, Any]],
-) -> tuple[str, bool, str]:
-    repo_dir = WORKSPACE / repo_name
-    readme_path = repo_dir / "README.md"
-    old_readme = readme_path.read_text(encoding="utf-8") if readme_path.exists() else ""
-    manifest_paths = indexed_manifest_paths(repo_dir, "stack")
-    if not manifest_paths:
-        raise RuntimeError(f"{repo_name}: no stack manifests found")
-    manifests = [load_yaml(path) for path in manifest_paths]
-    references = stack_references(manifests)
-    unresolved = sorted({reference for reference in references if reference not in catalog})
-    if unresolved:
-        raise RuntimeError(
-            f"{repo_name}: unresolved service references: {', '.join(unresolved)}"
-        )
-    infrastructure = any(catalog[reference]["infrastructure"] for reference in references)
-    display_name = repository_display_name(repo_name, manifests, old_readme)
-    summary = (
-        INFRASTRUCTURE_SUMMARIES.get(
-            repo_name,
-            f"{display_name} supplies Kubernetes system infrastructure for Wodby clusters.",
-        )
-        if infrastructure
-        else application_summary(display_name, references, catalog)
-    )
-    boilerplates = starter_boilerplates(references, catalog)
-    sources = service_sources(references, catalog)
-    overview = preserved_overview(old_readme, infrastructure) or generated_overview(
-        repo_dir, manifests, manifest_paths
-    )
-    guide_url = public_stack_guide_url(repo_name)
-
-    title = (
-        f"# {display_name} Kubernetes system stack for Wodby"
-        if infrastructure
-        else f"# {display_name} application stack for Kubernetes on Wodby"
-    )
+    display_name: str,
+    infrastructure: bool,
+    repo_dir: Path,
+    manifests: list[dict[str, Any]],
+    manifest_paths: list[Path],
+    boilerplates: list[dict[str, str]],
+    sources: list[tuple[str, str]],
+    guide_url: str | None,
+) -> str:
+    """Render the manifest-derived README content owned by automation."""
     lines = [
-        title,
+        "## Stack contract",
         "",
-        wrapped(summary),
-        "",
-        wrapped(
-            f"This repository defines the Wodby stack manifests and default "
-            f"service composition for {display_name}."
-        ),
-        "",
+        f"- [{display_name} stack on Wodby]({public_stack_url(repo_name)})",
         (
             "- [Wodby Kubernetes platform](https://wodby.com)"
             if infrastructure
@@ -411,9 +468,7 @@ def render_stack_readme(
         )
         lines.append("")
         for boilerplate in boilerplates:
-            lines.append(
-                f"- [{boilerplate['title']}]({boilerplate['repo']})"
-            )
+            lines.append(f"- [{boilerplate['title']}]({boilerplate['repo']})")
 
     if sources:
         heading = (
@@ -428,100 +483,134 @@ def render_stack_readme(
                 f"- [{service_title} {role}](https://github.com/wodby/{service_repo})"
             )
 
-    lines.extend(["", overview, ""])
-    commands = validation_commands(repo_dir, manifest_paths)
-
-    if infrastructure:
-        lines.extend(
-            [
-                "## Role in Wodby infrastructure",
-                "",
-                wrapped(
-                    "Wodby installs this stack as a cluster-owned system app when it "
-                    "is required by the Kubernetes provider or selected infrastructure "
-                    "configuration. It is not a template for user-deployed applications."
-                ),
-                "",
-                wrapped(
-                    "Installation order, enabled services, and settings can vary by "
-                    "cluster type. Wodby coordinates its lifecycle with cluster "
-                    "provisioning and infrastructure upgrades."
-                ),
-                "",
-                "## Platform maintenance",
-                "",
-                wrapped(
-                    "Changes can affect existing clusters. Preserve stack service names "
-                    "and service references unless the backend provisioning and upgrade "
-                    "paths are updated at the same time."
-                ),
-                "",
-                "Wodby platform maintainers can validate the manifests with:",
-            ]
-        )
-    else:
-        starter_links = ", ".join(
-            f"[{boilerplate['title']}]({boilerplate['repo']})"
-            for boilerplate in boilerplates
-        )
-        start_sentence = (
-            f"Start from {starter_links}, or connect your own compatible source repository."
-            if starter_links
-            else "Add this stack from the Wodby catalog, then configure its enabled services and integrations."
-        )
-        lines.extend(
-            [
-                "## Deploy this stack",
-                "",
-                wrapped(start_sentence),
-                "",
-                wrapped(
-                    "Review service versions, storage, links, and optional components "
-                    "when creating the application. The same stack can be reused across "
-                    "development, staging, and production environments."
-                ),
-                "",
-                "## Maintain a custom version",
-                "",
-                "1. Fork this repository.",
-                "2. Edit the stack manifest.",
-                "3. Import the repository as a "
-                "[Git-backed stack](https://wodby.com/docs/2.0/stacks/create/#create-a-git-backed-stack).",
-                "",
-                wrapped(
-                    "When replacing or renaming a stack service, update every related "
-                    "link target and derivative reference. Stack-local names and "
-                    "referenced service names are distinct identifiers."
-                ),
-                "",
-                "Validate the manifests with:",
-            ]
-        )
-
     lines.extend(
         [
             "",
-            "```bash",
-            commands,
-            "```",
+            generated_overview(repo_dir, manifests, manifest_paths),
             "",
-            (
-                "See the [stack manifest "
-                "reference](https://wodby.com/docs/2.0/stacks/template/) and the "
-                "[managed services index](https://github.com/wodby/services)."
+            wrapped(
+                "System services are enabled or disabled according to the cluster "
+                "provider and infrastructure configuration."
+                if infrastructure
+                else "Enabled optional services are selected by default but can be "
+                "excluded when an app is created. Disabled optional services are "
+                "available but not selected by default. Required services cannot be "
+                "excluded."
             ),
             "",
+            (
+                "## Validate the stack manifests"
+                if len(manifest_paths) > 1
+                else "## Validate the stack manifest"
+            ),
+            "",
+            "```bash",
+            validation_commands(repo_dir, manifest_paths),
+            "```",
         ]
     )
-    return "\n".join(lines), infrastructure, display_name
+    return "\n".join(lines)
+
+
+def render_stack_readme(
+    repo_name: str,
+    catalog: dict[str, dict[str, Any]],
+    *,
+    migrate: bool = False,
+) -> tuple[str, bool, str]:
+    repo_dir = WORKSPACE / repo_name
+    readme_path = repo_dir / "README.md"
+    old_readme = readme_path.read_text(encoding="utf-8") if readme_path.exists() else ""
+    manifest_paths = indexed_manifest_paths(repo_dir, "stack")
+    if not manifest_paths:
+        raise RuntimeError(f"{repo_name}: no stack manifests found")
+    manifests = [load_yaml(path) for path in manifest_paths]
+    references = stack_references(manifests)
+    unresolved = sorted(
+        {reference for reference in references if reference not in catalog}
+    )
+    if unresolved:
+        raise RuntimeError(
+            f"{repo_name}: unresolved service references: {', '.join(unresolved)}"
+        )
+    infrastructure = any(
+        catalog[reference]["infrastructure"] for reference in references
+    )
+    display_name = repository_display_name(repo_name, manifests, old_readme)
+    summary = (
+        INFRASTRUCTURE_SUMMARIES.get(
+            repo_name,
+            f"{display_name} supplies Kubernetes system infrastructure for Wodby clusters.",
+        )
+        if infrastructure
+        else application_summary(display_name, references, catalog)
+    )
+    boilerplates = starter_boilerplates(references, catalog)
+    sources = service_sources(references, catalog)
+    guide_url = public_stack_guide_url(repo_name)
+    content = generated_contract(
+        repo_name=repo_name,
+        display_name=display_name,
+        infrastructure=infrastructure,
+        repo_dir=repo_dir,
+        manifests=manifests,
+        manifest_paths=manifest_paths,
+        boilerplates=boilerplates,
+        sources=sources,
+        guide_url=guide_url,
+    )
+
+    if old_readme:
+        readme = (
+            migrate_legacy_readme(
+                old_readme,
+                content,
+                infrastructure=infrastructure,
+            )
+            if migrate
+            else replace_generated_content(old_readme, content)
+        )
+    else:
+        if not migrate:
+            raise RuntimeError(
+                f"{repo_name}: README has no generated markers; run with --migrate first"
+            )
+        title = (
+            f"# {display_name} Kubernetes system stack for Wodby"
+            if infrastructure
+            else f"# {display_name} application stack for Kubernetes on Wodby"
+        )
+        introduction = "\n\n".join(
+            [
+                title,
+                wrapped(summary),
+                wrapped(
+                    f"This repository defines the Wodby stack manifests and default "
+                    f"service composition for {display_name}."
+                ),
+            ]
+        )
+        readme = f"{introduction}\n\n{marked_generated_content(content)}\n"
+    return readme, infrastructure, display_name
 
 
 def main() -> int:
     parser = argparse.ArgumentParser()
     mode = parser.add_mutually_exclusive_group(required=True)
-    mode.add_argument("--check", action="store_true", help="Fail if a README is out of date")
-    mode.add_argument("--write", action="store_true", help="Write rendered README files")
-    parser.add_argument("repositories", nargs="*", help="Optional stack repository names")
+    mode.add_argument(
+        "--check", action="store_true", help="Fail if a README is out of date"
+    )
+    mode.add_argument(
+        "--write", action="store_true", help="Write rendered README files"
+    )
+    mode.add_argument(
+        "--migrate",
+        action="store_true",
+        help="Insert ownership markers into legacy READMEs once",
+    )
+    parser.add_argument(
+        "repositories", nargs="*", help="Optional stack repository names"
+    )
     args = parser.parse_args()
 
     available = repository_names(STACKS_REPOSITORY / "README.md", "stack-")
@@ -534,17 +623,23 @@ def main() -> int:
     changed: list[str] = []
     infrastructure_count = 0
     for repo_name in repositories:
-        readme, infrastructure, _ = render_stack_readme(repo_name, catalog)
+        readme, infrastructure, _ = render_stack_readme(
+            repo_name,
+            catalog,
+            migrate=args.migrate,
+        )
         infrastructure_count += int(infrastructure)
         readme_path = WORKSPACE / repo_name / "README.md"
-        current = readme_path.read_text(encoding="utf-8") if readme_path.exists() else ""
+        current = (
+            readme_path.read_text(encoding="utf-8") if readme_path.exists() else ""
+        )
         if current == readme:
             continue
         changed.append(repo_name)
-        if args.write:
+        if args.write or args.migrate:
             readme_path.write_text(readme, encoding="utf-8")
 
-    action = "updated" if args.write else "out of date"
+    action = "migrated" if args.migrate else "updated" if args.write else "out of date"
     for repo_name in changed:
         print(f"{repo_name}: README {action}")
     print(
