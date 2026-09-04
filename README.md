@@ -61,6 +61,7 @@ Before publishing a stack for others to use, review:
 | Node.js | [wodby/stack-node](https://github.com/wodby/stack-node) |
 | Next.js | [wodby/stack-nextjs](https://github.com/wodby/stack-nextjs) |
 | Dagster | [wodby/stack-dagster](https://github.com/wodby/stack-dagster) |
+| Chatwoot | [wodby/stack-chatwoot](https://github.com/wodby/stack-chatwoot) |
 | Slack Inviter | [wodby/stack-slack-inviter](https://github.com/wodby/stack-slack-inviter) |
 
 ### Data, messaging, and search stacks
