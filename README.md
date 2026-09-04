@@ -60,6 +60,7 @@ Before publishing a stack for others to use, review:
 | Flask | [wodby/stack-flask](https://github.com/wodby/stack-flask) |
 | Ruby | [wodby/stack-ruby](https://github.com/wodby/stack-ruby) |
 | Rails | [wodby/stack-rails](https://github.com/wodby/stack-rails) |
+| Discourse | [wodby/stack-discourse](https://github.com/wodby/stack-discourse) |
 | Go | [wodby/stack-go](https://github.com/wodby/stack-go) |
 | Node.js | [wodby/stack-node](https://github.com/wodby/stack-node) |
 | Next.js | [wodby/stack-nextjs](https://github.com/wodby/stack-nextjs) |
