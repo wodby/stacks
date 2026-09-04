@@ -49,6 +49,7 @@ Before publishing a stack for others to use, review:
 | PHP | [wodby/stack-php](https://github.com/wodby/stack-php) |
 | Drupal | [wodby/stack-drupal](https://github.com/wodby/stack-drupal) |
 | WordPress | [wodby/stack-wordpress](https://github.com/wodby/stack-wordpress) |
+| Ghost | [wodby/stack-ghost](https://github.com/wodby/stack-ghost) |
 | Laravel | [wodby/stack-laravel](https://github.com/wodby/stack-laravel) |
 | Matomo | [wodby/stack-matomo](https://github.com/wodby/stack-matomo) |
 | Python | [wodby/stack-python](https://github.com/wodby/stack-python) |
