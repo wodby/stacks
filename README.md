@@ -46,6 +46,9 @@ Before publishing a stack for others to use, review:
 | Stack | Repository |
 | --- | --- |
 | HTML | [wodby/stack-html](https://github.com/wodby/stack-html) |
+| Angular | [wodby/stack-angular](https://github.com/wodby/stack-angular) |
+| React | [wodby/stack-react](https://github.com/wodby/stack-react) |
+| Vue | [wodby/stack-vue](https://github.com/wodby/stack-vue) |
 | PHP | [wodby/stack-php](https://github.com/wodby/stack-php) |
 | Drupal | [wodby/stack-drupal](https://github.com/wodby/stack-drupal) |
 | WordPress | [wodby/stack-wordpress](https://github.com/wodby/stack-wordpress) |
