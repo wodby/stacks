@@ -64,6 +64,7 @@ Before publishing a stack for others to use, review:
 | Node.js | [wodby/stack-node](https://github.com/wodby/stack-node) |
 | Next.js | [wodby/stack-nextjs](https://github.com/wodby/stack-nextjs) |
 | Dagster | [wodby/stack-dagster](https://github.com/wodby/stack-dagster) |
+| Chatwoot | [wodby/stack-chatwoot](https://github.com/wodby/stack-chatwoot) |
 | Mattermost | [wodby/stack-mattermost](https://github.com/wodby/stack-mattermost) |
 | Slack Inviter | [wodby/stack-slack-inviter](https://github.com/wodby/stack-slack-inviter) |
 
