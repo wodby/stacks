@@ -79,6 +79,12 @@ Before publishing a stack for others to use, review:
 | RabbitMQ | [wodby/stack-rabbitmq](https://github.com/wodby/stack-rabbitmq) |
 | Distribution Registry | [wodby/stack-distribution](https://github.com/wodby/stack-distribution) |
 | Solr | [wodby/stack-solr](https://github.com/wodby/stack-solr) |
+| Elasticsearch | [wodby/stack-elasticsearch](https://github.com/wodby/stack-elasticsearch) |
+| OpenSearch | [wodby/stack-opensearch](https://github.com/wodby/stack-opensearch) |
+| ClickHouse | [wodby/stack-clickhouse](https://github.com/wodby/stack-clickhouse) |
+| Apache Kafka | [wodby/stack-kafka](https://github.com/wodby/stack-kafka) |
+| Apache Spark | [wodby/stack-spark](https://github.com/wodby/stack-spark) |
+| Apache Airflow | [wodby/stack-airflow](https://github.com/wodby/stack-airflow) |
 | ZooKeeper | [wodby/stack-zookeeper](https://github.com/wodby/stack-zookeeper) |
 
 ### Utilities and integrations
@@ -93,11 +99,20 @@ Before publishing a stack for others to use, review:
 | FRP Server | [wodby/stack-frps](https://github.com/wodby/stack-frps) |
 | OpenClaw | [wodby/stack-openclaw](https://github.com/wodby/stack-openclaw) |
 
+### Identity and access
+
+| Stack | Repository |
+| --- | --- |
+| Keycloak | [wodby/stack-keycloak](https://github.com/wodby/stack-keycloak) |
+
 ### Observability app stacks
 
 | Stack | Repository |
 | --- | --- |
 | Prometheus | [wodby/stack-prometheus](https://github.com/wodby/stack-prometheus) |
+| Grafana | [wodby/stack-grafana](https://github.com/wodby/stack-grafana) |
+| Grafana Loki | [wodby/stack-loki](https://github.com/wodby/stack-loki) |
+| VictoriaMetrics | [wodby/stack-victoria-metrics](https://github.com/wodby/stack-victoria-metrics) |
 
 ### Kubernetes system stacks
 
