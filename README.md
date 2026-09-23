@@ -113,6 +113,15 @@ Before publishing a stack for others to use, review:
 | --- | --- |
 | Keycloak | [wodby/stack-keycloak](https://github.com/wodby/stack-keycloak) |
 
+### AI inference stacks
+
+| Stack | Repository |
+| --- | --- |
+| vLLM (preview) | [wodby/stack-vllm](https://github.com/wodby/stack-vllm) |
+
+The vLLM stack requires GPU-ready Kubernetes nodes and private-network app access.
+See its README for prerequisites and outstanding runtime validation.
+
 ### Observability app stacks
 
 | Stack | Repository |
