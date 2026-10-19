@@ -74,6 +74,7 @@ Before publishing a stack for others to use, review:
 
 | Stack | Repository |
 | --- | --- |
+| MongoDB | [wodby/stack-mongodb](https://github.com/wodby/stack-mongodb) |
 | MariaDB | [wodby/stack-mariadb](https://github.com/wodby/stack-mariadb) |
 | MySQL | [wodby/stack-mysql](https://github.com/wodby/stack-mysql) |
 | PostgreSQL | [wodby/stack-postgres](https://github.com/wodby/stack-postgres) |
