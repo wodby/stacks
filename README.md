@@ -70,6 +70,12 @@ Before publishing a stack for others to use, review:
 | Mattermost | [wodby/stack-mattermost](https://github.com/wodby/stack-mattermost) |
 | Slack Inviter | [wodby/stack-slack-inviter](https://github.com/wodby/stack-slack-inviter) |
 
+### Backend platforms
+
+| Stack | Repository |
+| --- | --- |
+| Supabase | [wodby/stack-supabase](https://github.com/wodby/stack-supabase) |
+
 ### Data, messaging, and search stacks
 
 | Stack | Repository |
