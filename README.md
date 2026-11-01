@@ -112,6 +112,7 @@ Before publishing a stack for others to use, review:
 | 3X UI | [wodby/stack-3xui](https://github.com/wodby/stack-3xui) |
 | FRP Server | [wodby/stack-frps](https://github.com/wodby/stack-frps) |
 | OpenClaw | [wodby/stack-openclaw](https://github.com/wodby/stack-openclaw) |
+| T3 Code | [wodby/stack-t3code](https://github.com/wodby/stack-t3code) |
 
 ### Identity and access
 
