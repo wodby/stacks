@@ -64,6 +64,7 @@ Before publishing a stack for others to use, review:
 | Rails | [wodby/stack-rails](https://github.com/wodby/stack-rails) |
 | Discourse | [wodby/stack-discourse](https://github.com/wodby/stack-discourse) |
 | Go | [wodby/stack-go](https://github.com/wodby/stack-go) |
+| Rust | [wodby/stack-rust](https://github.com/wodby/stack-rust) |
 | Node.js | [wodby/stack-node](https://github.com/wodby/stack-node) |
 | Next.js | [wodby/stack-nextjs](https://github.com/wodby/stack-nextjs) |
 | Dagster | [wodby/stack-dagster](https://github.com/wodby/stack-dagster) |
