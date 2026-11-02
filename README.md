@@ -54,6 +54,7 @@ Before publishing a stack for others to use, review:
 | WordPress | [wodby/stack-wordpress](https://github.com/wodby/stack-wordpress) |
 | Ghost | [wodby/stack-ghost](https://github.com/wodby/stack-ghost) |
 | Laravel | [wodby/stack-laravel](https://github.com/wodby/stack-laravel) |
+| Symfony | [wodby/stack-symfony](https://github.com/wodby/stack-symfony) |
 | Matomo | [wodby/stack-matomo](https://github.com/wodby/stack-matomo) |
 | Moodle | [wodby/stack-moodle](https://github.com/wodby/stack-moodle) |
 | Python | [wodby/stack-python](https://github.com/wodby/stack-python) |
