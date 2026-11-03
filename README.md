@@ -54,6 +54,7 @@ Before publishing a stack for others to use, review:
 | WordPress | [wodby/stack-wordpress](https://github.com/wodby/stack-wordpress) |
 | Ghost | [wodby/stack-ghost](https://github.com/wodby/stack-ghost) |
 | Laravel | [wodby/stack-laravel](https://github.com/wodby/stack-laravel) |
+| Symfony | [wodby/stack-symfony](https://github.com/wodby/stack-symfony) |
 | Matomo | [wodby/stack-matomo](https://github.com/wodby/stack-matomo) |
 | Moodle | [wodby/stack-moodle](https://github.com/wodby/stack-moodle) |
 | Python | [wodby/stack-python](https://github.com/wodby/stack-python) |
@@ -64,6 +65,7 @@ Before publishing a stack for others to use, review:
 | Rails | [wodby/stack-rails](https://github.com/wodby/stack-rails) |
 | Discourse | [wodby/stack-discourse](https://github.com/wodby/stack-discourse) |
 | Go | [wodby/stack-go](https://github.com/wodby/stack-go) |
+| Spring Boot | [wodby/stack-spring-boot](https://github.com/wodby/stack-spring-boot) |
 | ASP.NET Core | [wodby/stack-aspnetcore](https://github.com/wodby/stack-aspnetcore) |
 | Node.js | [wodby/stack-node](https://github.com/wodby/stack-node) |
 | Next.js | [wodby/stack-nextjs](https://github.com/wodby/stack-nextjs) |
