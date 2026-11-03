@@ -76,6 +76,7 @@ Before publishing a stack for others to use, review:
 | Dagster | [wodby/stack-dagster](https://github.com/wodby/stack-dagster) |
 | Chatwoot | [wodby/stack-chatwoot](https://github.com/wodby/stack-chatwoot) |
 | Mattermost | [wodby/stack-mattermost](https://github.com/wodby/stack-mattermost) |
+| Metabase | [wodby/stack-metabase](https://github.com/wodby/stack-metabase) |
 | Slack Inviter | [wodby/stack-slack-inviter](https://github.com/wodby/stack-slack-inviter) |
 
 ### Backend platforms
