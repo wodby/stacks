@@ -65,6 +65,7 @@ Before publishing a stack for others to use, review:
 | Rails | [wodby/stack-rails](https://github.com/wodby/stack-rails) |
 | Discourse | [wodby/stack-discourse](https://github.com/wodby/stack-discourse) |
 | Go | [wodby/stack-go](https://github.com/wodby/stack-go) |
+| Java | [wodby/stack-java](https://github.com/wodby/stack-java) |
 | Rust | [wodby/stack-rust](https://github.com/wodby/stack-rust) |
 | Spring Boot | [wodby/stack-spring-boot](https://github.com/wodby/stack-spring-boot) |
 | Kotlin | [wodby/stack-kotlin](https://github.com/wodby/stack-kotlin) |
