@@ -71,6 +71,7 @@ Before publishing a stack for others to use, review:
 | ASP.NET Core | [wodby/stack-aspnetcore](https://github.com/wodby/stack-aspnetcore) |
 | Node.js | [wodby/stack-node](https://github.com/wodby/stack-node) |
 | Next.js | [wodby/stack-nextjs](https://github.com/wodby/stack-nextjs) |
+| TanStack Start | [wodby/stack-tanstack-start](https://github.com/wodby/stack-tanstack-start) |
 | Dagster | [wodby/stack-dagster](https://github.com/wodby/stack-dagster) |
 | Chatwoot | [wodby/stack-chatwoot](https://github.com/wodby/stack-chatwoot) |
 | Mattermost | [wodby/stack-mattermost](https://github.com/wodby/stack-mattermost) |
