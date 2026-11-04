@@ -158,6 +158,7 @@ See its README for prerequisites and outstanding runtime validation.
 | Grafana | [wodby/stack-grafana](https://github.com/wodby/stack-grafana) |
 | Grafana Loki | [wodby/stack-loki](https://github.com/wodby/stack-loki) |
 | VictoriaMetrics | [wodby/stack-victoria-metrics](https://github.com/wodby/stack-victoria-metrics) |
+| Grafana Tempo | [wodby/stack-tempo](https://github.com/wodby/stack-tempo) |
 
 ### Kubernetes system stacks
 
