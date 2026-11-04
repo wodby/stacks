@@ -75,6 +75,7 @@ Before publishing a stack for others to use, review:
 | TanStack Start | [wodby/stack-tanstack-start](https://github.com/wodby/stack-tanstack-start) |
 | Dagster | [wodby/stack-dagster](https://github.com/wodby/stack-dagster) |
 | Chatwoot | [wodby/stack-chatwoot](https://github.com/wodby/stack-chatwoot) |
+| Zammad | [wodby/stack-zammad](https://github.com/wodby/stack-zammad) |
 | Mattermost | [wodby/stack-mattermost](https://github.com/wodby/stack-mattermost) |
 | Slack Inviter | [wodby/stack-slack-inviter](https://github.com/wodby/stack-slack-inviter) |
 
