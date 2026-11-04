@@ -87,6 +87,8 @@ Before publishing a stack for others to use, review:
 | Stack | Repository |
 | --- | --- |
 | Supabase | [wodby/stack-supabase](https://github.com/wodby/stack-supabase) |
+| Gitea | [wodby/stack-gitea](https://github.com/wodby/stack-gitea) |
+| Forgejo | [wodby/stack-forgejo](https://github.com/wodby/stack-forgejo) |
 
 ### Data, messaging, and search stacks
 
