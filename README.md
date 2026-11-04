@@ -57,6 +57,7 @@ Before publishing a stack for others to use, review:
 | Symfony | [wodby/stack-symfony](https://github.com/wodby/stack-symfony) |
 | Matomo | [wodby/stack-matomo](https://github.com/wodby/stack-matomo) |
 | Moodle | [wodby/stack-moodle](https://github.com/wodby/stack-moodle) |
+| Odoo | [wodby/stack-odoo](https://github.com/wodby/stack-odoo) |
 | Python | [wodby/stack-python](https://github.com/wodby/stack-python) |
 | Django | [wodby/stack-django](https://github.com/wodby/stack-django) |
 | FastAPI | [wodby/stack-fastapi](https://github.com/wodby/stack-fastapi) |
