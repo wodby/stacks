@@ -80,6 +80,7 @@ Before publishing a stack for others to use, review:
 | Strapi | [wodby/stack-strapi](https://github.com/wodby/stack-strapi) |
 | Dagster | [wodby/stack-dagster](https://github.com/wodby/stack-dagster) |
 | Chatwoot | [wodby/stack-chatwoot](https://github.com/wodby/stack-chatwoot) |
+| Zammad | [wodby/stack-zammad](https://github.com/wodby/stack-zammad) |
 | Mattermost | [wodby/stack-mattermost](https://github.com/wodby/stack-mattermost) |
 | Metabase | [wodby/stack-metabase](https://github.com/wodby/stack-metabase) |
 | Slack Inviter | [wodby/stack-slack-inviter](https://github.com/wodby/stack-slack-inviter) |
