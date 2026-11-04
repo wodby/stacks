@@ -107,6 +107,7 @@ Before publishing a stack for others to use, review:
 | Solr | [wodby/stack-solr](https://github.com/wodby/stack-solr) |
 | Elasticsearch | [wodby/stack-elasticsearch](https://github.com/wodby/stack-elasticsearch) |
 | OpenSearch | [wodby/stack-opensearch](https://github.com/wodby/stack-opensearch) |
+| Meilisearch | [wodby/stack-meilisearch](https://github.com/wodby/stack-meilisearch) |
 | ClickHouse | [wodby/stack-clickhouse](https://github.com/wodby/stack-clickhouse) |
 | Apache Kafka | [wodby/stack-kafka](https://github.com/wodby/stack-kafka) |
 | Apache Spark | [wodby/stack-spark](https://github.com/wodby/stack-spark) |
