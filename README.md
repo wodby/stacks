@@ -81,6 +81,7 @@ Before publishing a stack for others to use, review:
 | Chatwoot | [wodby/stack-chatwoot](https://github.com/wodby/stack-chatwoot) |
 | Mattermost | [wodby/stack-mattermost](https://github.com/wodby/stack-mattermost) |
 | Metabase | [wodby/stack-metabase](https://github.com/wodby/stack-metabase) |
+| n8n | [wodby/stack-n8n](https://github.com/wodby/stack-n8n) |
 | Slack Inviter | [wodby/stack-slack-inviter](https://github.com/wodby/stack-slack-inviter) |
 
 ### Backend platforms
