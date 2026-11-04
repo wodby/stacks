@@ -128,6 +128,7 @@ Before publishing a stack for others to use, review:
 | OpenSMTPD | [wodby/stack-opensmtpd](https://github.com/wodby/stack-opensmtpd) |
 | Gotenberg | [wodby/stack-gotenberg](https://github.com/wodby/stack-gotenberg) |
 | Tailscale | [wodby/stack-tailscale](https://github.com/wodby/stack-tailscale) |
+| NetBird | [wodby/stack-netbird](https://github.com/wodby/stack-netbird) |
 | 3X UI | [wodby/stack-3xui](https://github.com/wodby/stack-3xui) |
 | FRP Server | [wodby/stack-frps](https://github.com/wodby/stack-frps) |
 | RustDesk Server | [wodby/stack-rustdesk](https://github.com/wodby/stack-rustdesk) |
