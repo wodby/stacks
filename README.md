@@ -73,6 +73,10 @@ Before publishing a stack for others to use, review:
 | Node.js | [wodby/stack-node](https://github.com/wodby/stack-node) |
 | Next.js | [wodby/stack-nextjs](https://github.com/wodby/stack-nextjs) |
 | TanStack Start | [wodby/stack-tanstack-start](https://github.com/wodby/stack-tanstack-start) |
+| Nuxt | [wodby/stack-nuxt](https://github.com/wodby/stack-nuxt) |
+| SvelteKit | [wodby/stack-sveltekit](https://github.com/wodby/stack-sveltekit) |
+| Astro | [wodby/stack-astro](https://github.com/wodby/stack-astro) |
+| Strapi | [wodby/stack-strapi](https://github.com/wodby/stack-strapi) |
 | Dagster | [wodby/stack-dagster](https://github.com/wodby/stack-dagster) |
 | Chatwoot | [wodby/stack-chatwoot](https://github.com/wodby/stack-chatwoot) |
 | Mattermost | [wodby/stack-mattermost](https://github.com/wodby/stack-mattermost) |
