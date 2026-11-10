@@ -56,6 +56,7 @@ Before publishing a stack for others to use, review:
 | Laravel | [wodby/stack-laravel](https://github.com/wodby/stack-laravel) |
 | Symfony | [wodby/stack-symfony](https://github.com/wodby/stack-symfony) |
 | Matomo | [wodby/stack-matomo](https://github.com/wodby/stack-matomo) |
+| Matomo (buildable) | [wodby/stack-matomo-buildable](https://github.com/wodby/stack-matomo-buildable) |
 | Mautic | [wodby/stack-mautic](https://github.com/wodby/stack-mautic) |
 | Moodle | [wodby/stack-moodle](https://github.com/wodby/stack-moodle) |
 | Odoo | [wodby/stack-odoo](https://github.com/wodby/stack-odoo) |
