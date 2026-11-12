@@ -147,6 +147,7 @@ Before publishing a stack for others to use, review:
 | Stack | Repository |
 | --- | --- |
 | Keycloak | [wodby/stack-keycloak](https://github.com/wodby/stack-keycloak) |
+| Keycloak (buildable) | [wodby/stack-keycloak-buildable](https://github.com/wodby/stack-keycloak-buildable) |
 
 ### AI inference stacks
 
