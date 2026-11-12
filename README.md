@@ -125,6 +125,7 @@ Before publishing a stack for others to use, review:
 | Apache Kafka | [wodby/stack-kafka](https://github.com/wodby/stack-kafka) |
 | Apache Spark | [wodby/stack-spark](https://github.com/wodby/stack-spark) |
 | Apache Airflow | [wodby/stack-airflow](https://github.com/wodby/stack-airflow) |
+| Apache Airflow (buildable) | [wodby/stack-airflow-buildable](https://github.com/wodby/stack-airflow-buildable) |
 | ZooKeeper | [wodby/stack-zookeeper](https://github.com/wodby/stack-zookeeper) |
 
 ### Utilities and integrations
