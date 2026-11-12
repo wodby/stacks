@@ -85,6 +85,7 @@ Before publishing a stack for others to use, review:
 | Astro | [wodby/stack-astro](https://github.com/wodby/stack-astro) |
 | Strapi | [wodby/stack-strapi](https://github.com/wodby/stack-strapi) |
 | Dagster | [wodby/stack-dagster](https://github.com/wodby/stack-dagster) |
+| Dagster (buildable) | [wodby/stack-dagster-buildable](https://github.com/wodby/stack-dagster-buildable) |
 | Chatwoot | [wodby/stack-chatwoot](https://github.com/wodby/stack-chatwoot) |
 | Zammad | [wodby/stack-zammad](https://github.com/wodby/stack-zammad) |
 | Mattermost | [wodby/stack-mattermost](https://github.com/wodby/stack-mattermost) |
