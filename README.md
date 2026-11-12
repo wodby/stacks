@@ -60,6 +60,7 @@ Before publishing a stack for others to use, review:
 | Mautic | [wodby/stack-mautic](https://github.com/wodby/stack-mautic) |
 | Moodle | [wodby/stack-moodle](https://github.com/wodby/stack-moodle) |
 | Odoo | [wodby/stack-odoo](https://github.com/wodby/stack-odoo) |
+| Odoo (buildable) | [wodby/stack-odoo-buildable](https://github.com/wodby/stack-odoo-buildable) |
 | Python | [wodby/stack-python](https://github.com/wodby/stack-python) |
 | Django | [wodby/stack-django](https://github.com/wodby/stack-django) |
 | FastAPI | [wodby/stack-fastapi](https://github.com/wodby/stack-fastapi) |
