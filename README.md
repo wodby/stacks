@@ -59,6 +59,7 @@ Before publishing a stack for others to use, review:
 | Matomo (buildable) | [wodby/stack-matomo-buildable](https://github.com/wodby/stack-matomo-buildable) |
 | Mautic | [wodby/stack-mautic](https://github.com/wodby/stack-mautic) |
 | Moodle | [wodby/stack-moodle](https://github.com/wodby/stack-moodle) |
+| Moodle (buildable) | [wodby/stack-moodle-buildable](https://github.com/wodby/stack-moodle-buildable) |
 | Odoo | [wodby/stack-odoo](https://github.com/wodby/stack-odoo) |
 | Odoo (buildable) | [wodby/stack-odoo-buildable](https://github.com/wodby/stack-odoo-buildable) |
 | Python | [wodby/stack-python](https://github.com/wodby/stack-python) |
