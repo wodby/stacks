@@ -70,6 +70,7 @@ Before publishing a stack for others to use, review:
 | Ruby | [wodby/stack-ruby](https://github.com/wodby/stack-ruby) |
 | Rails | [wodby/stack-rails](https://github.com/wodby/stack-rails) |
 | Discourse | [wodby/stack-discourse](https://github.com/wodby/stack-discourse) |
+| Discourse (buildable) | [wodby/stack-discourse-buildable](https://github.com/wodby/stack-discourse-buildable) |
 | Go | [wodby/stack-go](https://github.com/wodby/stack-go) |
 | Java | [wodby/stack-java](https://github.com/wodby/stack-java) |
 | Rust | [wodby/stack-rust](https://github.com/wodby/stack-rust) |
