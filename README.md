@@ -85,7 +85,6 @@ Before publishing a stack for others to use, review:
 | Astro | [wodby/stack-astro](https://github.com/wodby/stack-astro) |
 | Strapi | [wodby/stack-strapi](https://github.com/wodby/stack-strapi) |
 | Dagster | [wodby/stack-dagster](https://github.com/wodby/stack-dagster) |
-| Dagster (buildable) | [wodby/stack-dagster-buildable](https://github.com/wodby/stack-dagster-buildable) |
 | Chatwoot | [wodby/stack-chatwoot](https://github.com/wodby/stack-chatwoot) |
 | Zammad | [wodby/stack-zammad](https://github.com/wodby/stack-zammad) |
 | Mattermost | [wodby/stack-mattermost](https://github.com/wodby/stack-mattermost) |
@@ -125,7 +124,6 @@ Before publishing a stack for others to use, review:
 | Apache Kafka | [wodby/stack-kafka](https://github.com/wodby/stack-kafka) |
 | Apache Spark | [wodby/stack-spark](https://github.com/wodby/stack-spark) |
 | Apache Airflow | [wodby/stack-airflow](https://github.com/wodby/stack-airflow) |
-| Apache Airflow (buildable) | [wodby/stack-airflow-buildable](https://github.com/wodby/stack-airflow-buildable) |
 | ZooKeeper | [wodby/stack-zookeeper](https://github.com/wodby/stack-zookeeper) |
 
 ### Utilities and integrations
