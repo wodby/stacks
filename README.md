@@ -87,6 +87,7 @@ Before publishing a stack for others to use, review:
 | Dagster | [wodby/stack-dagster](https://github.com/wodby/stack-dagster) |
 | Chatwoot | [wodby/stack-chatwoot](https://github.com/wodby/stack-chatwoot) |
 | Zammad | [wodby/stack-zammad](https://github.com/wodby/stack-zammad) |
+| Redmine | [wodby/stack-redmine](https://github.com/wodby/stack-redmine) |
 | Mattermost | [wodby/stack-mattermost](https://github.com/wodby/stack-mattermost) |
 | eLabFTW | [wodby/stack-elabftw](https://github.com/wodby/stack-elabftw) |
 | Metabase | [wodby/stack-metabase](https://github.com/wodby/stack-metabase) |
