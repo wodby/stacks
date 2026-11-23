@@ -92,6 +92,7 @@ Before publishing a stack for others to use, review:
 | Mattermost | [wodby/stack-mattermost](https://github.com/wodby/stack-mattermost) |
 | eLabFTW | [wodby/stack-elabftw](https://github.com/wodby/stack-elabftw) |
 | SENAITE LIMS | [wodby/stack-senaite](https://github.com/wodby/stack-senaite) |
+| openBIS | [wodby/stack-openbis](https://github.com/wodby/stack-openbis) |
 | Metabase | [wodby/stack-metabase](https://github.com/wodby/stack-metabase) |
 | n8n | [wodby/stack-n8n](https://github.com/wodby/stack-n8n) |
 | Slack Inviter | [wodby/stack-slack-inviter](https://github.com/wodby/stack-slack-inviter) |
