@@ -89,6 +89,7 @@ Before publishing a stack for others to use, review:
 | Zammad | [wodby/stack-zammad](https://github.com/wodby/stack-zammad) |
 | Redmine | [wodby/stack-redmine](https://github.com/wodby/stack-redmine) |
 | Plane | [wodby/stack-plane](https://github.com/wodby/stack-plane) |
+| Jitsi Meet | [wodby/stack-jitsi](https://github.com/wodby/stack-jitsi) |
 | Mattermost | [wodby/stack-mattermost](https://github.com/wodby/stack-mattermost) |
 | eLabFTW | [wodby/stack-elabftw](https://github.com/wodby/stack-elabftw) |
 | SENAITE LIMS | [wodby/stack-senaite](https://github.com/wodby/stack-senaite) |
